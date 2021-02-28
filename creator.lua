@@ -733,6 +733,7 @@ M.createFrog = function( x, y)
     enemy:addEventListener( "sprite", g.spriteListenerFrog )
     enemy:play()
     enemy.objectType = "sprite"
+    enemy.direction = "left"
 
     local jumpDetector = display.newRect( frontGroup, x-140, enemy.y+50, 10, 10 )
     jumpDetector.myName = "jumpDetector"
@@ -743,8 +744,7 @@ M.createFrog = function( x, y)
     jumpDetector.isVisible = false
     jumpDetector.contacted = 0
 
-    table.insert(enemy,0)
-    table.insert(enemy,jumpDetector)
+    enemy.jumpDetector = jumpDetector
 
     enemy:setLinearVelocity( 0, 0)
 

@@ -253,9 +253,7 @@ end
 
 M.spriteListenerFrog = function( event )
     local frog = event.target 
-
     local speed = 240
-    local detector = frog[#frog]
 
     if (frog.sequence == "attack") then
         if (frog.frame == 15 and frog.x < 1300) then
@@ -276,9 +274,9 @@ M.spriteListenerFrog = function( event )
 
     if (frog.sequence == "jump") then
         if (frog.frame == 13) then 
-            local transitionX = frog[#frog-1] == 1 and 120 or -120
+            local transitionX = frog.direction == "right" and 120 or -120
 
-            detector.x = frog.x + transitionX
+            frog.jumpDetector.x = frog.x + transitionX
 
             if (stopped) then
                 frog:setLinearVelocity(0,0) 
@@ -287,7 +285,7 @@ M.spriteListenerFrog = function( event )
             end
         end
 
-        if (frog.frame == 17 and frog[#frog-1] == 0) then 
+        if (frog.frame == 17 and frog.direction == "left") then 
             frog:setSequence("attack")
             frog:play()
             frog.y = frog.y+12
@@ -297,12 +295,12 @@ M.spriteListenerFrog = function( event )
         if (frog.frame == 3) then
             local vx, vy = frog:getLinearVelocity()
 
-            if (detector[#detector]==0) then 
+            if (frog.jumpDetector.contacted==0) then 
                 frog:scale(-1,1)
-                frog[#frog-1] = frog[#frog-1] == 0 and 1 or 0
+                frog.direction = frog.direction == "left" and "right" or "left"
             end
 
-            if (frog[#frog-1] == 1) then 
+            if (frog.direction == "right") then 
                     frog:setLinearVelocity(vx+speed,0)  
             else
                     frog:setLinearVelocity(vx-speed,0)
