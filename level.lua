@@ -74,25 +74,16 @@ function scene:show( event )
                 creator = require("creator")
                 creator.setGame(game)
 
-                builder.setUpLevel(creator, game, collisionHandler, composer.getVariable("lvl"))
+                builder.setUp(creator, game, collisionHandler, composer.getVariable("lvl"))
 
                 musicTrack = composer.getVariable("lvl") > 5 and audio.loadStream( "dessert_song.MP3") or audio.loadStream( "s6.mp3")
 
-                game.setComposer(composer)
-                game.setCreator(creator)
-                game.setBlocks(creator.getBlocksArray())
-                game.setInterface(interface)
-                --game.movePlayer(0)
-                --game.moveForward(8000)
+                game.setUp(composer,creator,creator.getBlocksArray(),interface)
                 
-                interface.setGame(game)
-                interface.setCreator(creator)
-                interface.setBuilder(builder)
-                interface.setCollisionHandler(collisionHandler)
-                interface.setFileHandler(fileHandler)
+                interface.setUp(game,creator,builder,collisionHandler,fileHandler)
                 interface.pauseIcon()
 
-                collisionHandler.setVariables(game,creator,interface,creator.getFrontGroup(),0,0)
+                collisionHandler.setUp(game,creator,interface,creator.getFrontGroup(),0,0)
 
                 game.moving()                  
                 audio.play( musicTrack, { channel=1, loops=-1 } )

@@ -2308,7 +2308,7 @@ local function createLevel(level)
   createLevels[level+1]()
 end
 
-M.setUpLevel = function(creator, game, collisionHandler, level)
+M.setUp = function(creator, game, collisionHandler, level)
   setVariables(creator,game,collisionHandler)
   createLevel(level)
 end

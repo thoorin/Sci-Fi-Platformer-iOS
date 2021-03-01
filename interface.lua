@@ -18,16 +18,10 @@ local composer = require("composer")
 local pauseIcon
 local playIcon
 
-M.setGame = function(g)
-    game = g
-end
-
-M.setCreator = function(c)
-    creator = c
-end
-
-M.setBuilder = function(b)
-    builder = b
+M.setUp = function(g,c,b,cH,fH)
+    game, creator, builder = g, c, b
+    M.setCollisionHandler(cH)
+    M.setFileHandler(fH)
 end
 
 M.setCollisionHandler = function(cH)
