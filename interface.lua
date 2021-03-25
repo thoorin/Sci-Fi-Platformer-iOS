@@ -226,14 +226,13 @@ local nextLevel = function()
         display.remove(elements[i])
     end
 
-    composer.removeScene( "level", true )
     if (level > 10) then 
         composer.gotoScene("ending") 
-        composer.removeScene("level", true)
     else
         composer.setVariable("lvl", level)
         composer.gotoScene("level")
     end
+    composer.removeScene( "level", true )
     audio.play(clickSound)
 end
 

@@ -2,7 +2,7 @@
 local fileHandler = require( "fileHandler" )
 
 local scene = composer.newScene()
-clickSound = audio.loadSound( "click.ogg" )
+clickSound = audio.loadSound( "click.mp3" )
 
 
 

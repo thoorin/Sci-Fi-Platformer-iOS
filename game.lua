@@ -192,7 +192,7 @@ M.playerEvent = function( event )
     if (game == true) then
         if event.phase == "began" then
             pressed = true
-            if (event.x < display.contentWidth-display.actualContentWidth*0.5 and (event.x > 300 or event.y > 80)) then
+            if (event.x < display.contentWidth-display.actualContentWidth*0.5 and (event.x > display.screenOriginX+100 or event.y > 80)) then
                 M.jump()
             elseif (shoots == false and event.x > display.contentWidth-display.actualContentWidth*0.5) then
                     M.shoot()
@@ -306,7 +306,7 @@ end
 M.spriteListenerLarva = function( event )
     local larva = event.target 
     
-    if (larva.x > 0 and larva.x < 420 and larva.sequence == "idle") then
+    if (larva.x > 0 and larva.x < composer.getVariable( "playerStartingPosition") + 100 and larva.sequence == "idle") then
         larva:setSequence("attack")
         larva:play()
         larva.x = larva.x-15

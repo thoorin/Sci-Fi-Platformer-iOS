@@ -23,6 +23,7 @@ local json = require( "json" )
 local poisonImpact = audio.loadSound( "poison_impact.mp3" )
 local tankShoot = audio.loadSound( "tank_shoot.mp3" ) 
 local larvaEmergeSound = audio.loadSound( "larva_emerging3.mp3" )
+local clickSound = audio.loadSound( "click.mp3" )
 local wrongSound = audio.loadSound( "wrong.mp3" )
 local filePath = system.pathForFile( "flash.json" )
 local filePath1 = system.pathForFile( "water_splash.json" )
@@ -489,7 +490,16 @@ end
 M.createMovingBlock = function( x, y, delay )
     local block = display.newImageRect(mainGroup, en.getMovingBlock(), 64, 32 )
     block.myName = "blockMoving"
-    block.x, block.y = x, y
+    block.y = y
+    if (display.actualContentWidth/display.actualContentHeight < 1.6) then
+      if (composer.getVariable("lvl") == 3) then
+      block.x = x + 150
+    elseif (composer.getVariable("lvl") == 7) then
+      block.x = x - 90
+      end
+    else
+      block.x = x
+    end
     physics.addBody( block, "dynamic", { density = 10, bounce = 0 } )
     block.gravityScale = 0
     block.isFixedRotation = true

@@ -79,7 +79,6 @@ function scene:show( event )
                 musicTrack = composer.getVariable("lvl") > 5 and audio.loadStream( "dessert_song.MP3") or audio.loadStream( "s6.mp3")
 
                 game.setUp(composer,creator,creator.getBlocksArray(),interface)
-                
                 interface.setUp(game,creator,builder,collisionHandler,fileHandler)
                 interface.pauseIcon()
 
